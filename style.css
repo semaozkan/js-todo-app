@@ -1,0 +1,11 @@
+/* default tarayıcı margin ve paddingini kaldırır. */
+*{ 
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    width: 100wh;
+    height: 100vh;
+    background-color: red;
+}
