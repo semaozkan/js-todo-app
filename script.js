@@ -61,6 +61,10 @@ window.addEventListener('load', () => {
             }
         })
 
+        task_delete_el.addEventListener("click", () => {
+            list_el.removeChild(task_el)
+        })
+
     })
 })
 
@@ -71,36 +75,3 @@ window.addEventListener('load', () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const input = document.querySelector("#new-task-input")
-// const submit = document.querySelector("#new-task-submit")
-// const text = document.querySelector(".text")
-// const editButton = document.querySelector(".edit")
-// const deleteButton = document.querySelector(".delete")
-
-// submit.addEventListener("click", () => {
-//     const task = input.value
-
-// })
-
-// const addTask = (item) => {
-
-// }
