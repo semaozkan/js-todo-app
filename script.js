@@ -3,15 +3,9 @@ window.addEventListener('load', () => {
     const input = document.querySelector("#new-task-input")
     const list_el = document.querySelector("#tasks")
 
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
+    const savedTask = JSON.parse(localStorage.getItem("tasks")) || [];
 
-        const task = input.value;
-
-        if(!task){
-            alert("Please fill out the task")
-            return;
-        }
+    const addTaskFunc = (task) => {
 
         const task_el = document.createElement("div")
         task_el.classList.add("task")
@@ -58,12 +52,46 @@ window.addEventListener('load', () => {
             }else{
                 task_input_el.setAttribute("readonly", "readonly")
                 task_edit_el.innerText = "Edit"
+                const index = savedTask.indexOf(task);
+                if(index !== -1){
+
+                    savedTask[index] = task_input_el.value
+                    localStorage.setItem("tasks", JSON.stringify(savedTask));
+                }
+                
             }
         })
 
         task_delete_el.addEventListener("click", () => {
             list_el.removeChild(task_el)
+            const index = savedTask.indexOf(task);
+            if (index !== -1) { 
+                savedTask.splice(index, 1); 
+                localStorage.setItem("tasks", JSON.stringify(savedTask));
+            }
+            
         })
+    }
+
+    savedTask.forEach((tasks) => {
+        addTaskFunc(tasks)
+    })
+
+
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const task = input.value;
+
+        if(!task){
+            alert("Please fill out the task")
+            return;
+        }
+        
+        addTaskFunc(task);
+
+        savedTask.push(task)  
+        localStorage.setItem("tasks", JSON.stringify(savedTask))  
 
     })
 })
